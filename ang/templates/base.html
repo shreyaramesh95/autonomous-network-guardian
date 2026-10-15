@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANG · {{ title or page|replace('_',' ')|title }}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/industry.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body data-page="{{ page }}"{% if incident_id is defined %} data-incident-id="{{ incident_id }}"{% endif %}>
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand">Autonomous Network<br>Guardian</div>
+    <div class="vrule"></div>
+    <nav class="navlinks">
+      {% for key, label, href in nav %}
+      <a class="navlink" href="{{ href }}"
+         {% if key == page or (page == 'incident_detail' and key == 'incidents') %}aria-current="page"{% endif %}>{{ label }}</a>
+      {% endfor %}
+    </nav>
+    <div class="cycle-meta">
+      <div class="lbl">Monitoring cycle</div>
+      <div class="mono" id="cycle-meta">…</div>
+    </div>
+  </header>
+  <div class="hairline"></div>
+  <div class="scenariobar">
+    <span class="lbl">Active scenario</span>
+    <span class="st st-warn" id="scenario-label">…</span>
+    <span class="text-muted" style="font-size:12px;flex:1" id="scenario-note"></span>
+    <a class="btn btn-secondary" href="/simulation">Change scenario</a>
+  </div>
+  <main class="main">
+    <div id="flash"></div>
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex;flex-direction:column;gap:16px">
+  <div class="card blueprint" style="padding:16px">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="row" style="align-items:flex-end;flex-wrap:wrap;gap:12px">
+      <div>
+        <div class="card-kicker">Monitoring mode</div>
+        <div class="text-muted" style="font-size:12px" id="mode-note">checking&hellip;</div>
+      </div>
+      <span class="spacer"></span>
+      <div class="row" style="gap:8px">
+        <button class="btn btn-secondary" id="btn-mode-sim">Simulation (samples)</button>
+        <button class="btn btn-primary" id="btn-mode-live">Live network (real devices)</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="align-items:flex-end">
+    <div>
+      <h3 style="margin:0">Registered devices</h3>
+      <div class="text-muted" style="font-size:13px" id="devices-sub">measurements from the latest monitoring cycle</div>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn btn-secondary blueprint" id="btn-scan">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Scan my Wi-Fi network
+    </button>
+    <button class="btn btn-primary blueprint" id="btn-register">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>Register device
+    </button>
+  </div>
+
+  <div id="scan-results"></div>
+
+  <div class="card blueprint" style="padding:16px">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr>
+          <th>Device</th><th>IP address</th><th>Type</th><th>Role</th><th>Depends on</th>
+          <th>Status</th><th>Latency</th><th>Packet loss</th><th>Last checked</th><th></th>
+        </tr></thead>
+        <tbody id="devices-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-muted" style="font-size:12px">
+    Latency classification — 0–50 ms good · 50–100 ms moderate · 100–200 ms high · &gt;200 ms critical. Thresholds are configurable.
+  </div>
+</div>
+
+<div id="dialog-root"></div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex;flex-direction:column;gap:18px;max-width:900px">
+  <div>
+    <h3 style="margin:0">Simulation mode</h3>
+    <div class="text-muted" style="font-size:13px">
+      Controlled fault scenarios for demonstrations. Each scenario is deterministic:
+      the monitoring engine reads simulated state instead of live network tests.
+    </div>
+  </div>
+  <div class="simgrid" id="sim-grid"></div>
+  <div class="row" style="gap:10px">
+    <button class="btn btn-secondary" id="btn-reset-data">Reset demo data</button>
+    <span class="text-muted" style="font-size:12px">
+      Clears measurements and incident history, keeps registered devices, returns to a healthy baseline.
+    </span>
+  </div>
+  <div class="text-muted" style="font-size:12px">
+    Recovery closes the open incident, records the recovery timestamp and duration, and restores the health score.
+  </div>
+</div>
+{% endblock %}

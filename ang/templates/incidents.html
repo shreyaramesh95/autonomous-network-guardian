@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex;flex-direction:column;gap:16px">
+  <div>
+    <h3 style="margin:0">Incidents</h3>
+    <div class="text-muted" style="font-size:13px" id="incidents-sub">
+      Open incidents close automatically once recovery is confirmed across the configured number of monitoring cycles.
+    </div>
+  </div>
+  <div class="card blueprint" style="padding:16px">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div class="table-wrap">
+      <table class="table">
+        <thead><tr>
+          <th>ID</th><th>Root cause</th><th>Priority</th><th>Status</th>
+          <th>Affected devices</th><th>Started</th><th>Recovered</th><th>Duration</th><th></th>
+        </tr></thead>
+        <tbody id="incidents-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

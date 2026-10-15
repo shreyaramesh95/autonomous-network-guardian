@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px;align-items:start" id="diag-grid">
+  <div class="col" style="gap:20px">
+    <div class="card blueprint bp" id="rootcause-card">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Probable root cause</div>
+      <div id="rootcause-body" class="text-muted">Loading…</div>
+    </div>
+    <div class="card blueprint bp">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Evidence</div>
+      <div id="evidence-body"></div>
+    </div>
+    <div class="card blueprint bp">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Hypotheses compared</div>
+      <div id="hypotheses-body"></div>
+    </div>
+  </div>
+  <div class="col" style="gap:20px">
+    <div class="card blueprint" style="padding:18px;gap:10px">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Affected devices</div>
+      <div id="affected-body"></div>
+    </div>
+    <div class="card blueprint" style="padding:18px;gap:10px">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Recommended action</div>
+      <div id="actions-body"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

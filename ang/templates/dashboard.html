@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid-dash">
+  <div class="col">
+    <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px" id="dash-top">
+      <div class="card blueprint bp" id="health-card">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="card-kicker">Network health score</div>
+        <div id="health-body" class="text-muted">Loading…</div>
+      </div>
+      <div class="col" style="gap:20px">
+        <div class="card blueprint" style="padding:16px;gap:10px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div class="card-kicker">Shared dependencies</div>
+          <div id="shared-deps"></div>
+        </div>
+        <div class="card blueprint" style="padding:16px;gap:8px">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div class="card-kicker">Devices</div>
+          <div id="devices-mini"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card blueprint bp" id="diag-card">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="row">
+        <div class="card-kicker" style="margin:0">Current diagnosis</div>
+        <span id="diag-prio"></span>
+        <span class="spacer"></span>
+        <a class="btn btn-secondary" href="/diagnosis">Full diagnosis</a>
+      </div>
+      <div id="diag-body" class="text-muted">Loading…</div>
+    </div>
+
+    <div class="card blueprint" style="padding:0;gap:0">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="row" style="padding:14px 16px 8px">
+        <div class="card-kicker" style="margin:0">Active incidents</div>
+        <span class="spacer"></span>
+        <a class="btn btn-secondary" href="/incidents">All incidents</a>
+      </div>
+      <div style="padding:0 16px 14px" id="active-incidents"></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card blueprint" style="padding:16px;gap:12px">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="row" style="justify-content:space-between">
+        <div class="card-kicker" style="margin:0">Visual Topology</div>
+        <a class="btn btn-secondary" style="font-size:11px;padding:3px 8px" href="/topology">Interactive View →</a>
+      </div>
+      <div id="topology"></div>
+    </div>
+    <div class="card blueprint" style="padding:16px;gap:10px">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker">Recent events</div>
+      <div id="recent-events"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="display:flex;flex-direction:column;gap:18px">
+  <a class="btn btn-ghost" href="/incidents" style="align-self:flex-start">← Back to incidents</a>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:24px;align-items:start" id="detail-grid">
+    <div class="card blueprint bp" id="detail-card">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div id="detail-body" class="text-muted">Loading…</div>
+    </div>
+    <div class="card blueprint" style="padding:20px;gap:0">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div class="card-kicker" style="margin-bottom:10px">Incident timeline</div>
+      <div id="detail-timeline"></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col" style="gap:20px">
+  <!-- Interactive Scenario Quick-Switch Bar -->
+  <div class="card blueprint" style="padding:14px 18px;">
+    <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div class="card-kicker" style="margin:0">Live Dependency Architecture &amp; Blast Radius Radar</div>
+        <div class="text-muted" style="font-size:12px;margin-top:2px;">
+          Interactive topological graph modeling physical and service dependencies. Click any node to analyze its failure blast radius.
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span class="lbl" style="margin-right:4px;">Inject scenario:</span>
+        <button class="btn btn-secondary btn-sm topo-quick-sc" data-sc="reset">🟢 Normal</button>
+        <button class="btn btn-secondary btn-sm topo-quick-sc" data-sc="gateway-failure">🚨 Gateway Down</button>
+        <button class="btn btn-secondary btn-sm topo-quick-sc" data-sc="dns-failure">🌐 DNS Outage</button>
+        <button class="btn btn-secondary btn-sm topo-quick-sc" data-sc="device-failure">💻 PC-02 Down</button>
+        <button class="btn btn-secondary btn-sm topo-quick-sc" data-sc="internet-failure">✂️ WAN Cut</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Topology & Inspector Grid -->
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start;" id="topo-grid">
+    <!-- Visual Graph Container -->
+    <div class="card blueprint bp" style="padding:18px;gap:12px;">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div class="card-kicker" style="margin:0">Dependency Graph (DAG)</div>
+        <div style="display:flex;gap:12px;align-items:center;font-size:11px;">
+          <span style="display:inline-flex;align-items:center;gap:4px;"><span class="topo-dot green"></span> Healthy</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;"><span class="topo-dot red pulse"></span> Root Cause</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;"><span class="topo-dot amber"></span> Blast Radius</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;"><span class="topo-dot gray"></span> External</span>
+        </div>
+      </div>
+      
+      <!-- Interactive SVG Canvas -->
+      <div id="topo-canvas-wrap" style="position:relative;width:100%;min-height:480px;background:var(--color-surface);border:1px solid var(--color-divider);border-radius:4px;overflow:hidden;">
+        <svg id="topo-svg" width="100%" height="480" viewBox="0 0 800 480" style="display:block;"></svg>
+        <div id="topo-loading" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-heading);font-size:16px;letter-spacing:.05em;color:var(--color-neutral-600);background:rgba(255,255,255,0.7);">
+          Constructing topology graph…
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:4px;">
+        <div class="text-muted" style="font-size:12px;" id="topo-summary-note">Loading dependency rules…</div>
+        <div style="font-size:11px;color:var(--color-neutral-600);">Tip: Click on any node above to inspect details and downstream dependencies.</div>
+      </div>
+    </div>
+
+    <!-- Right Sidebar: Node Inspector & Blast Radius Analyzer -->
+    <div class="col" style="gap:20px;">
+      <div class="card blueprint bp" id="topo-inspector-card">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="card-kicker">Asset Inspector</div>
+        <div id="topo-inspector-body">
+          <div class="text-muted" style="padding:16px 0;font-size:13px;text-align:center;">
+            Select any node on the graph to view its real-time telemetry, upstream dependencies, and failure blast radius.
+          </div>
+        </div>
+      </div>
+
+      <!-- Blast Radius Explanation Card -->
+      <div class="card blueprint" style="padding:16px;gap:10px;">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div class="card-kicker">How Dependency Analysis Works</div>
+        <div style="font-size:12px;line-height:1.5;color:var(--color-neutral-700);">
+          <p style="margin:0 0 8px 0;">
+            <strong>Root Cause Isolation:</strong> When an upstream parent (like <code>RTR-01</code>) fails, all dependent clients lose WAN connectivity.
+          </p>
+          <p style="margin:0 0 8px 0;">
+            <strong>Symptom Suppression:</strong> ANG recognizes that downstream clients are merely casualties of the gateway outage, suppressing secondary alerts.
+          </p>
+          <p style="margin:0;">
+            <strong>Blast Radius:</strong> The exact count and list of devices that will suffer collateral failure if a given node breaks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
