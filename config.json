@@ -1,0 +1,30 @@
+{
+  "network_name": "College CS Laboratory - Room 304",
+  "nodes": [
+    {"id": "NIC_HOST", "name": "Host Network Adapter", "type": "interface", "ip": "127.0.0.1"},
+    {"id": "SW_01", "name": "Lab Switch-01 (Cisco 2960)", "type": "switch", "ip": "192.168.1.2"},
+    {"id": "GW_01", "name": "Default Gateway / Router", "type": "gateway", "ip": "192.168.1.1"},
+    {"id": "ISP_UPLINK", "name": "ISP Fiber Optical Link", "type": "isp", "ip": "103.21.54.1"},
+    {"id": "DNS_PRIMARY", "name": "Primary DNS Server", "type": "dns", "ip": "8.8.8.8"},
+    {"id": "DNS_BACKUP", "name": "Cloudflare DNS", "type": "dns", "ip": "1.1.1.1"},
+    {"id": "EXT_WEB", "name": "External Web Services (Google)", "type": "cloud", "domain": "google.com"},
+    {"id": "PC_01", "name": "Lab PC-01", "type": "workstation", "ip": "192.168.1.101"},
+    {"id": "PC_02", "name": "Lab PC-02", "type": "workstation", "ip": "192.168.1.102"},
+    {"id": "PC_03", "name": "Lab PC-03", "type": "workstation", "ip": "192.168.1.103"},
+    {"id": "PC_04", "name": "Lab PC-04", "type": "workstation", "ip": "192.168.1.104"},
+    {"id": "PC_05", "name": "Lab PC-05", "type": "workstation", "ip": "192.168.1.105"}
+  ],
+  "dependencies": [
+    {"dependent": "SW_01", "depends_on": "NIC_HOST", "description": "Switch connectivity requires active host NIC"},
+    {"dependent": "PC_01", "depends_on": "SW_01", "description": "PC-01 connected to Switch-01"},
+    {"dependent": "PC_02", "depends_on": "SW_01", "description": "PC-02 connected to Switch-01"},
+    {"dependent": "PC_03", "depends_on": "SW_01", "description": "PC-03 connected to Switch-01"},
+    {"dependent": "PC_04", "depends_on": "SW_01", "description": "PC-04 connected to Switch-01"},
+    {"dependent": "PC_05", "depends_on": "SW_01", "description": "PC-05 connected to Switch-01"},
+    {"dependent": "GW_01", "depends_on": "SW_01", "description": "Gateway uplink passes through Switch-01"},
+    {"dependent": "ISP_UPLINK", "depends_on": "GW_01", "description": "ISP WAN connection terminates at Gateway"},
+    {"dependent": "DNS_PRIMARY", "depends_on": "ISP_UPLINK", "description": "DNS queries travel over ISP link"},
+    {"dependent": "DNS_BACKUP", "depends_on": "ISP_UPLINK", "description": "Secondary DNS requires ISP link"},
+    {"dependent": "EXT_WEB", "depends_on": "DNS_PRIMARY", "description": "Domain name resolution required for web access"}
+  ]
+}
